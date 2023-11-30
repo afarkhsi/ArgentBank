@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../assets/argentBankLogo.png';
-// import './style.css';
+import './style.css';
 
 const HomeLogo = styled.img`
   background-color: none;
@@ -13,7 +13,7 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0px 10px;
-  height: 8%;
+  // height: 8%;
   min-height: 80px;
   // margin: 0 auto;
   // width: 100%;
@@ -26,8 +26,7 @@ const StyledLink = styled(NavLink)`
   &:hover {
     color: green;
   }
-  font-size: 24px;
-  font-weight: 500;
+  color: #2c3e50;
 `;
 
 // Function generating Header Component in all pages
@@ -35,11 +34,16 @@ function Header() {
   return (
     <NavContainer className="header">
       <Link className="header_logo" to="/">
-        <HomeLogo className="header_logo_img" src={Logo} alt="ArgentBank logo" />
+        <HomeLogo
+          className="header_logo_img"
+          src={Logo}
+          alt="ArgentBank logo"
+        />
       </Link>
-        <StyledLink to="/" className="header_nav_link">
-          Sign In
-        </StyledLink>
+      <StyledLink to="/SignIn" className="header_nav_link">
+        <i class="fa fa-user-circle"></i>
+        Sign In
+      </StyledLink>
     </NavContainer>
   );
 }

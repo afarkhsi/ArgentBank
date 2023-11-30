@@ -1,12 +1,15 @@
 // import './style.css';
 import styled from 'styled-components';
 import Banner from '../../components/Banner/Banner';
+import Features from '../../components/Features/Features';
 
 const HomeContainer = styled.div`
   position: relative;
-  display: flex;
+  // display: flex;
   width: 100%;
-  height: 92%;
+  // height: 92%;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const LoaderWrapper = styled.div`
@@ -20,11 +23,10 @@ export const LoaderWrapper = styled.div`
   color: #e60000;
 `;
 
-
-
 const HomePage = () => (
   <HomeContainer>
     <Banner />
+    <Features />
   </HomeContainer>
 );
 
