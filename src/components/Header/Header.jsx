@@ -41,7 +41,7 @@ function Header() {
         />
       </Link>
       <StyledLink to="/SignIn" className="header_nav_link">
-        <i class="fa fa-user-circle"></i>
+        <i className="fa fa-user-circle"></i>
         Sign In
       </StyledLink>
     </NavContainer>

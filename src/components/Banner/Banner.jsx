@@ -22,10 +22,10 @@ const Banner = () => {
     <BannerContainer>
       <BannerImg src={Img} className="banner-img" alt="Banner image" />
       <BannerDescription className="banner-description">
-        <p class="banner-description_subtitle">No fees.</p>
-        <p class="banner-description_subtitle">No minimum deposit.</p>
-        <p class="banner-description_subtitle">High interest rates.</p>
-        <p class="banner-description_text">
+        <p className="banner-description_subtitle">No fees.</p>
+        <p className="banner-description_subtitle">No minimum deposit.</p>
+        <p className="banner-description_subtitle">High interest rates.</p>
+        <p className="banner-description_text">
           Open a savings account with Argent Bank today!
         </p>
       </BannerDescription>
