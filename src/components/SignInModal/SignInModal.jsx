@@ -12,7 +12,7 @@ const SignInModal = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // const token = useSelector((state) => state.login.token);
   // const error = useSelector((state) => state.login.error);
@@ -47,11 +47,12 @@ const SignInModal = () => {
     console.log(email, password);
 
     try {
-      const isAuth = await login({ email, password });
-      if (isAuth.status === 'error') {
-        return dispatch(loginSlice.actions.logFail(isAuth.message));
+      const isAuthentified = await login(email, password);
+      if (isAuthentified.status === 'error') {
+        return dispatch(loginSlice.actions.logFail(isAuthentified.message));
       }
       dispatch(loginSlice.actions.logSucces());
+      navigate('/profile');
     } catch (error) {
       dispatch(loginSlice.actions.logFail(error.message));
     }

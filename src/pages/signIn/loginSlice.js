@@ -32,7 +32,7 @@ export const loginSlice = createSlice({
       state.isAuthentified = false;
     },
     isToken: (state) => {
-      state.isAuth = true;
+      state.isAuthentified = true;
     },
   },
 });

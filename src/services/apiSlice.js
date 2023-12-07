@@ -85,15 +85,66 @@ const LOGIN_URL = BASE_URL + '/user/login';
 // const auth_service = { login, userProfile };
 // export default auth_service;
 
-export const login = ({ email, password }) => {
+export const login = (email, password) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(LOGIN_URL, { email, password });
       console.log(res);
-      resolve(res);
+      resolve(res.data.body);
+      if (res) {
+        sessionStorage.setItem('token', JSON.stringify(res.data.body.token));
+      }
     } catch (error) {
+      sessionStorage.setItem('token', 'Tokentest');
       console.log(error.message);
+      console.log(LOGIN_URL);
       reject(error);
     }
   });
 };
+
+// export const login = async(email, password) => {
+
+//   try {
+//     const res = await axios.post(LOGIN_URL, { email, password });
+//     axios.defaults.headers.common['Authorization'] =
+//     'Bearer ' + res.data.body.token
+//     const { token } = res.data.body
+//   localStorage.setItem('authToken', token)
+//     console.log(res);
+//     console.log(axios.defaults.headers.common)
+//     // if (res) {
+//     //   sessionStorage.setItem('token', JSON.stringify(res.data.body.token));
+//     // }
+//     if (isAuthenticated()) {
+//       return true
+//     } else {
+//       return false
+//     }
+//   } catch (error) {
+//     sessionStorage.setItem('token', 'Tokentest');
+//     console.log(error.message);
+//     console.log(LOGIN_URL);
+//     throw new Error(error)
+
+//   }
+// };
+
+// function isAuthenticated() {
+// const token = window.localStorage.getItem('authToken')
+// //console.log(token)
+// if (token) {
+//   const { exp } = jwtDecode(token)
+//   //console.log(exp)
+
+//   if (exp * 1000 > new Date().getTime()) {
+//     return true
+//   }
+// }
+// return false
+// }
+
+// const authAPI = {
+// isAuthenticated,
+// }
+// export default authAPI
