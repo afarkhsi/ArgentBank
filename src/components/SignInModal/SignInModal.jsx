@@ -1,24 +1,115 @@
+import React, { useEffect, useState } from 'react';
 import './style.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import auth_service, { login } from '../../services/apiSlice';
+import { loginSlice } from '../../pages/signIn/loginSlice';
+import styled from 'styled-components';
+
 const SignInModal = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  // const token = useSelector((state) => state.login.token);
+  // const error = useSelector((state) => state.login.error);
+
+  // console.log(email, password);
+
+  const { token, isLoading, isAuthentified, error } = useSelector(
+    (state) => state.login
+  );
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      return alert('Fill up all the form');
+    }
+
+    dispatch(loginSlice.actions.logPending());
+    console.log(email, password);
+
+    try {
+      const isAuth = await login({ email, password });
+      if (isAuth.status === 'error') {
+        return dispatch(loginSlice.actions.logFail(isAuth.message));
+      }
+      dispatch(loginSlice.actions.logSucces());
+    } catch (error) {
+      dispatch(loginSlice.actions.logFail(error.message));
+    }
+  };
+
+  // const submitForm = (e) => {
+  //   e.preventDefault();
+  //   dispatch(auth_service.login(email, password, rememberMe));
+  // };
+
+  // useEffect(() => {
+  //   if (token != null || localStorage.getItem('token') != null) {
+  //     navigate('/profile');
+  //   }
+  // }, [token, navigate]);
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        {error && <div variant="danger">{error}</div>}
+        <form onSubmit={handleOnSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter Email"
+              required
+              onChange={handleOnChange}
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              required
+              onChange={handleOnChange}
+            />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              onChange={(e) => {
+                setRememberMe(e.target.checked);
+              }}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button className="sign-in-button">Sign In</button>
+          <button className="sign-in-button" type="submit">
+            Sign In
+          </button>
+          {/* {error !== null ? <label className="error">{error}</label> : ''} */}
         </form>
       </section>
     </main>

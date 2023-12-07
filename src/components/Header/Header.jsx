@@ -40,7 +40,7 @@ function Header() {
           alt="ArgentBank logo"
         />
       </Link>
-      <StyledLink to="/SignIn" className="header_nav_link">
+      <StyledLink to="/login" className="header_nav_link">
         <i className="fa fa-user-circle"></i>
         Sign In
       </StyledLink>
