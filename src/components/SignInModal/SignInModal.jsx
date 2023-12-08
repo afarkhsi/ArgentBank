@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import auth_service, { login } from '../../services/apiSlice';
 import { loginSlice } from '../../pages/signIn/loginSlice';
 import styled from 'styled-components';
+import { userLogin } from '../../services/userApi';
 
 const SignInModal = () => {
   const [email, setEmail] = useState('');
@@ -19,9 +20,15 @@ const SignInModal = () => {
 
   // console.log(email, password);
 
-  const { token, isLoading, isAuthentified, error } = useSelector(
+  const { token, isLoading, isAuthentified, isRemember, error } = useSelector(
     (state) => state.login
   );
+
+  //   V2
+  // const [credientials, setCredientials] = useState({
+  //   email: '',
+  //   password: '',
+  // });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +43,15 @@ const SignInModal = () => {
         break;
     }
   };
+
+  // V2
+  //   function handelChange({ currentTarget }) {
+  //     const { value, name } = currentTarget;
+  //     setCredientials({
+  //       ...credientials,
+  //       [name]: value,
+  //     });
+  //   }
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -54,9 +70,32 @@ const SignInModal = () => {
       dispatch(loginSlice.actions.logSucces());
       navigate('/profile');
     } catch (error) {
-      dispatch(loginSlice.actions.logFail(error.message));
+      console.log(error);
+      dispatch(loginSlice.actions.logFail(error.response.data.message));
     }
   };
+
+  // V2
+  // async function handelSubmit(e) {
+  //   e.preventDefault();
+
+  //   dispatch(loginSlice.actions.logPending());
+  //   try {
+  //     const isAuth = await userLogin(credientials);
+
+  //     if (isRemember) {
+  //       localStorage.setItem('token', isAuth.body.token);
+  //     } else {
+  //       localStorage.removeItem('token');
+  //     }
+
+  //     dispatch(loginSlice.actions.logSucces());
+  //     navigate('/profile');
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(loginSlice.actions.logFail(error.response.data.message));
+  //   }
+  // }
 
   // const submitForm = (e) => {
   //   e.preventDefault();
@@ -92,7 +131,7 @@ const SignInModal = () => {
               type="password"
               name="password"
               id="password"
-              value={password}
+              // value={password}
               required
               onChange={handleOnChange}
             />
@@ -101,9 +140,10 @@ const SignInModal = () => {
             <input
               type="checkbox"
               id="remember-me"
-              onChange={(e) => {
-                setRememberMe(e.target.checked);
-              }}
+              defaultChecked={isRemember}
+              onChange={() =>
+                dispatch(loginSlice.actions.logRemember(!isRemember))
+              }
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>

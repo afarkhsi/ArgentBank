@@ -36,9 +36,10 @@
 import axios from 'axios';
 import { loginSlice } from '../pages/signIn/loginSlice';
 import { userSlice } from '../pages/user/profileSlice';
+import { jwtDecode } from 'jwt-decode';
 
 const BASE_URL = 'http://localhost:3001/api/v1';
-const LOGIN_URL = BASE_URL + '/user/login';
+export const LOGIN_URL = BASE_URL + '/user/login';
 
 // const login = (email, password, rememberMe) => (dispatch) => {
 //   axios
@@ -85,10 +86,25 @@ const LOGIN_URL = BASE_URL + '/user/login';
 // const auth_service = { login, userProfile };
 // export default auth_service;
 
+// const accessToken = 'elepHantGun';
+// axios.interceptors.request.use(
+//   (config) => {
+//     config.headers.authorization = `Bearer ${accessToken}`;
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
 export const login = (email, password) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(LOGIN_URL, { email, password });
+      axios.defaults.headers.common['Authorization'] =
+        'Bearer ' + res.data.body.token;
+      const { token } = res.data.body;
+      localStorage.setItem('authToken', token);
       console.log(res);
       resolve(res.data.body);
       if (res) {
@@ -103,48 +119,47 @@ export const login = (email, password) => {
   });
 };
 
-// export const login = async(email, password) => {
-
+// V2
+// export const login = async (email, password) => {
 //   try {
 //     const res = await axios.post(LOGIN_URL, { email, password });
 //     axios.defaults.headers.common['Authorization'] =
-//     'Bearer ' + res.data.body.token
-//     const { token } = res.data.body
-//   localStorage.setItem('authToken', token)
+//       'Bearer ' + res.data.body.token;
+//     const { token } = res.data.body;
+//     localStorage.setItem('authToken', token);
 //     console.log(res);
-//     console.log(axios.defaults.headers.common)
+//     console.log(axios.defaults.headers.common);
 //     // if (res) {
 //     //   sessionStorage.setItem('token', JSON.stringify(res.data.body.token));
 //     // }
 //     if (isAuthenticated()) {
-//       return true
+//       return true;
 //     } else {
-//       return false
+//       return false;
 //     }
 //   } catch (error) {
 //     sessionStorage.setItem('token', 'Tokentest');
 //     console.log(error.message);
 //     console.log(LOGIN_URL);
-//     throw new Error(error)
-
+//     throw new Error(error);
 //   }
 // };
 
 // function isAuthenticated() {
-// const token = window.localStorage.getItem('authToken')
-// //console.log(token)
-// if (token) {
-//   const { exp } = jwtDecode(token)
-//   //console.log(exp)
+//   const token = window.localStorage.getItem('authToken');
+//   //console.log(token)
+//   if (token) {
+//     const { exp } = jwtDecode(token);
+//     //console.log(exp)
 
-//   if (exp * 1000 > new Date().getTime()) {
-//     return true
+//     if (exp * 1000 > new Date().getTime()) {
+//       return true;
+//     }
 //   }
-// }
-// return false
+//   return false;
 // }
 
 // const authAPI = {
-// isAuthenticated,
-// }
-// export default authAPI
+//   isAuthenticated,
+// };
+// export default authAPI;
