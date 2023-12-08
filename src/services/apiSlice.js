@@ -36,9 +36,18 @@
 import axios from 'axios';
 import { loginSlice } from '../pages/signIn/loginSlice';
 import { userSlice } from '../pages/user/profileSlice';
+import {
+  userPending,
+  userSuccess,
+  userFail,
+  userLogout,
+  userUpdateSuccess,
+  userUpdateFail,
+} from '../pages/user/profileSlice';
 
 const BASE_URL = 'http://localhost:3001/api/v1';
 export const LOGIN_URL = BASE_URL + '/user/login';
+const USER_URL = BASE_URL + '/user/profile';
 
 // const login = (email, password, rememberMe) => (dispatch) => {
 //   axios
@@ -85,18 +94,49 @@ export const LOGIN_URL = BASE_URL + '/user/login';
 // const auth_service = { login, userProfile };
 // export default auth_service;
 
-// const accessToken = 'elepHantGun';
-// axios.interceptors.request.use(
-//   (config) => {
-//     config.headers.authorization = `Bearer ${accessToken}`;
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+export const userProfile = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const token = JSON.parse(sessionStorage.getItem('token'));
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
+      if (!token) {
+        reject('Token not found!');
+      }
+      const res = await axios.post(USER_URL);
+      if (token) {
+        const userInfo = res?.data?.body;
+        localStorage.setItem('firstName', userInfo?.firstName);
+      }
 
-export const login = (email, password) => {
+      console.log('response userPorfile:', res.data?.body);
+      resolve(res);
+    } catch (error) {
+      console.log(error.message);
+      reject(error);
+    }
+  });
+};
+
+export const getUserProfile = () => async (dispatch) => {
+  try {
+    dispatch(userPending());
+
+    const res = await userProfile();
+    if (res) {
+      return dispatch(userSuccess(res.data));
+    }
+
+    console.log('response de user :', res);
+    dispatch(userFail('User is not found'));
+  } catch (error) {
+    dispatch(userFail(error));
+    console.log(error.message);
+  }
+};
+
+export const login = (email, password, rememberMe) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(LOGIN_URL, { email, password });
@@ -104,8 +144,12 @@ export const login = (email, password) => {
       //   'Bearer ' + res.data.body.token;
       const { token } = res.data?.body;
       // localStorage.setItem('authToken', token);
-      console.log(res);
-      resolve(res.data?.body);
+      console.log('response login:', res);
+      resolve(res.data);
+
+      if (rememberMe) {
+        localStorage.setItem('token', JSON.stringify(token));
+      }
       if (res.data?.status === 200) {
         sessionStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('token', JSON.stringify(token));

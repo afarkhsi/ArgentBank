@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import auth_service, { login } from '../../services/apiSlice';
+import auth_service, { getUserProfile, login } from '../../services/apiSlice';
 import { loginSlice } from '../../pages/signIn/loginSlice';
 import styled from 'styled-components';
 import { userLogin } from '../../services/userApi';
 import axios from 'axios';
+
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
 
 const SignInModal = () => {
   const [email, setEmail] = useState('');
@@ -32,13 +37,16 @@ const SignInModal = () => {
   // });
 
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, checked } = e.target;
     switch (name) {
       case 'email':
         setEmail(value);
         break;
       case 'password':
         setPassword(value);
+        break;
+      case 'remember-me':
+        setRememberMe(checked);
         break;
       default:
         break;
@@ -76,6 +84,7 @@ const SignInModal = () => {
       }
       console.log('test:', isAuthentified.token);
       dispatch(loginSlice.actions.logSuccess(isAuthentified));
+      dispatch(getUserProfile());
       navigate('/profile');
     } catch (error) {
       console.log(error);

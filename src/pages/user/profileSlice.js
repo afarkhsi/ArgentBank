@@ -2,24 +2,29 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //Initial user state
 const initialState = {
-  email: null,
-  firstName: null,
-  lastName: null,
-  id: null,
+  isLoading: false,
+  email: '',
+  firstName: '',
+  lastName: '',
+  id: '',
   error: null,
 };
 
 //User slices
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    userPending: (state) => {
+      state.isLoading = true;
+    },
     userSuccess: (state, action) => {
-      state.email = action.payload.body.email;
-      state.firstName = action.payload.body.firstName;
-      state.lastName = action.payload.body.lastName;
-      state.id = action.payload.body.id;
+      state.email = action.payload.body?.email;
+      state.firstName = action.payload.body?.firstName;
+      state.lastName = action.payload.body?.lastName;
+      state.id = action.payload.body?.id;
       state.error = null;
+      state.isLoading = false;
     },
     userFail: (state, action) => {
       state.email = null;
@@ -34,6 +39,7 @@ export const userSlice = createSlice({
       state.lastName = null;
       state.id = null;
       state.error = null;
+      state.isLoading = false;
     },
     userUpdateSuccess: (state, action) => {
       state.email = action.payload.body.email;
@@ -41,6 +47,7 @@ export const userSlice = createSlice({
       state.lastName = action.payload.body.lastName;
       state.id = action.payload.body.id;
       state.error = null;
+      state.isLoading = false;
     },
     userUpdateFail: (state, action) => {
       state.email = action.payload.body.email;
@@ -52,10 +59,14 @@ export const userSlice = createSlice({
   },
 });
 
-// export const {
-//   userSuccess,
-//   userFail,
-//   userLogout,
-//   userUpdateSuccess,
-//   userUpdateFail,
-// } = userSlice;
+const { reducer, actions } = userSlice;
+export const {
+  userPending,
+  userSuccess,
+  userFail,
+  userLogout,
+  userUpdateSuccess,
+  userUpdateFail,
+} = actions;
+
+export default reducer;

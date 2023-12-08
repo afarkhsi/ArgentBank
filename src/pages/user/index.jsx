@@ -5,13 +5,15 @@ import { useNavigate } from 'react-router-dom';
 // import auth_service from '../../services/apiSlice';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { userSlice } from './profileSlice';
+import UserInfo from '../../components/UserInfo/UserInfo';
 
 const UserContainer = styled.div``;
 
-const token = localStorage.getItem('token');
-if (token) {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
+// const token = JSON.parse(sessionStorage.getItem('token'));
+// if (token) {
+//   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// }
 
 const UserPage = () => {
   // document.title = 'Argent Bank - User Page';
@@ -32,18 +34,12 @@ const UserPage = () => {
   //     sessionStorage.clear();
   //   }
   // }, [token, navigate]);
+
   return (
     <>
       {/* {token !== null ? ( */}
       <UserContainer className="bg-dark">
-        <div className="header">
-          <h1>
-            Welcome back
-            <br />
-            Tony Jarvis!
-          </h1>
-          <button className="edit-button">Edit Name</button>
-        </div>
+        <UserInfo />
         <AmountCard />
       </UserContainer>
       {/* ) : ( */}
