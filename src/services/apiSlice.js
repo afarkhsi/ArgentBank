@@ -101,17 +101,17 @@ export const login = (email, password) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(LOGIN_URL, { email, password });
-      axios.defaults.headers.common['Authorization'] =
-        'Bearer ' + res.data.body.token;
-      const { token } = res.data.body;
-      localStorage.setItem('authToken', token);
+      // axios.defaults.headers.common['Authorization'] =
+      //   'Bearer ' + res.data.body.token;
+      const { token } = res.data?.body;
+      // localStorage.setItem('authToken', token);
       console.log(res);
-      resolve(res.data.body);
-      if (res) {
-        sessionStorage.setItem('token', JSON.stringify(res.data.body.token));
+      resolve(res.data?.body);
+      if (res.data?.status === 200) {
+        sessionStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('token', JSON.stringify(token));
       }
     } catch (error) {
-      sessionStorage.setItem('token', 'Tokentest');
       console.log(error.message);
       console.log(LOGIN_URL);
       reject(error);
@@ -163,3 +163,10 @@ export const login = (email, password) => {
 //   isAuthenticated,
 // };
 // export default authAPI;
+
+/**
+ * Step 1 : login
+ * Step 2 : cas success => set token dans le local storage
+ * Step 3 : set token dans axios config (autorization: bearer)
+ * Step 4 : test route user/profile GET / POST
+ */

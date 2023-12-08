@@ -53,6 +53,12 @@ const SignInModal = () => {
   //     });
   //   }
 
+  // useEffect(() => {
+  //   if (token !== null || localStorage.getItem('token') !== null) {
+  //     navigate('/profile');
+  //   }
+  // }, [token, navigate]);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -67,11 +73,12 @@ const SignInModal = () => {
       if (isAuthentified.status === 'error') {
         return dispatch(loginSlice.actions.logFail(isAuthentified.message));
       }
-      dispatch(loginSlice.actions.logSucces());
+      console.log('test:', isAuthentified);
+      dispatch(loginSlice.actions.logSuccess(isAuthentified));
       navigate('/profile');
     } catch (error) {
       console.log(error);
-      dispatch(loginSlice.actions.logFail(error.response.data.message));
+      dispatch(loginSlice.actions.logFail(error.message));
     }
   };
 

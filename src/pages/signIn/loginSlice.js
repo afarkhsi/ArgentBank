@@ -15,8 +15,8 @@ export const loginSlice = createSlice({
     logPending: (state) => {
       state.isLoading = true;
     },
-    logSucces: (state, action) => {
-      state.token = action.payload.body.token;
+    logSuccess: (state, action) => {
+      state.token = action.payload.body?.token;
       state.isAuthentified = true;
       state.isLoading = false;
     },
