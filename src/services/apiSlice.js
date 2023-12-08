@@ -36,7 +36,6 @@
 import axios from 'axios';
 import { loginSlice } from '../pages/signIn/loginSlice';
 import { userSlice } from '../pages/user/profileSlice';
-import { jwtDecode } from 'jwt-decode';
 
 const BASE_URL = 'http://localhost:3001/api/v1';
 export const LOGIN_URL = BASE_URL + '/user/login';

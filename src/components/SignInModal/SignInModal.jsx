@@ -6,6 +6,7 @@ import auth_service, { login } from '../../services/apiSlice';
 import { loginSlice } from '../../pages/signIn/loginSlice';
 import styled from 'styled-components';
 import { userLogin } from '../../services/userApi';
+import axios from 'axios';
 
 const SignInModal = () => {
   const [email, setEmail] = useState('');
@@ -73,7 +74,7 @@ const SignInModal = () => {
       if (isAuthentified.status === 'error') {
         return dispatch(loginSlice.actions.logFail(isAuthentified.message));
       }
-      console.log('test:', isAuthentified);
+      console.log('test:', isAuthentified.token);
       dispatch(loginSlice.actions.logSuccess(isAuthentified));
       navigate('/profile');
     } catch (error) {
