@@ -25,6 +25,7 @@ const LogInOut = () => {
 
   const signOut = () => {
     localStorage.clear();
+    sessionStorage.clear();
     dispatch(userSlice.actions.userLogout());
     dispatch(loginSlice.actions.logOut());
   };

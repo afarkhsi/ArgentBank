@@ -25,3 +25,8 @@
 .header_nav_link :hover {
   color: green;
 }
+
+.header_nav {
+  display: flex;
+  gap: 2rem;
+}

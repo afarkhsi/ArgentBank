@@ -4,7 +4,7 @@ import Logo from '../../assets/argentBankLogo.png';
 import './style.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import LogInOut from '../LogIn/LogIn';
+import LogInOut from '../LogInOut/LogInOut';
 
 const HomeLogo = styled.img`
   background-color: none;
@@ -48,8 +48,8 @@ function Header() {
           alt="ArgentBank logo"
         />
       </Link>
-      <LogInOut />
-      {/* {token === null || !token || token === '' ? (
+      <div className="header_nav">
+        {/* {token === null || !token || token === '' ? (
         <StyledLink to="/login" className="header_nav_link sign_in">
           <i className="fa fa-user-circle"></i>
           Sign In
@@ -64,6 +64,8 @@ function Header() {
           Sign Out
         </StyledLink>
       )} */}
+        <LogInOut />
+      </div>
     </NavContainer>
   );
 }
