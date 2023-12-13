@@ -7,6 +7,21 @@
   font-weight: bold;
 }
 
-.fa-user-circle {
-  font-size: 18px;
+.fa-sign-out {
+  font-size: 25px;
+  padding-right: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.header_nav_link {
+  color: #2c3e50;
+  text-decoration: none;
+  text-align: center;
+}
+
+.header_nav_link :hover {
+  color: green;
 }

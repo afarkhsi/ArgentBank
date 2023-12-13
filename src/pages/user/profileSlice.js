@@ -35,38 +35,31 @@ const userSlice = createSlice({
     },
     userLogout: (state) => {
       state.email = null;
-      state.firstName = null;
-      state.lastName = null;
-      state.id = null;
+      state.firstName = '';
+      state.lastName = '';
+      state.id = '';
       state.error = null;
       state.isLoading = false;
     },
     userUpdateSuccess: (state, action) => {
-      state.email = action.payload.body.email;
       state.firstName = action.payload.body.firstName;
       state.lastName = action.payload.body.lastName;
-      state.id = action.payload.body.id;
-      state.error = null;
-      state.isLoading = false;
     },
     userUpdateFail: (state, action) => {
-      state.email = action.payload.body.email;
       state.firstName = action.payload.body.firstName;
       state.lastName = action.payload.body.lastName;
-      state.id = action.payload.body.id;
-      state.error = action.payload.message;
     },
   },
 });
 
-const { reducer, actions } = userSlice;
-export const {
-  userPending,
-  userSuccess,
-  userFail,
-  userLogout,
-  userUpdateSuccess,
-  userUpdateFail,
-} = actions;
+// const { reducer, actions } = userSlice;
+// export const {
+//   userPending,
+//   userSuccess,
+//   userFail,
+//   userLogout,
+//   userUpdateSuccess,
+//   userUpdateFail,
+// } = actions;
 
-export default reducer;
+export default userSlice;

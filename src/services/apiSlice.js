@@ -35,8 +35,7 @@
 
 import axios from 'axios';
 import { loginSlice } from '../pages/signIn/loginSlice';
-import { userSlice } from '../pages/user/profileSlice';
-import {
+import userSlice, {
   userPending,
   userSuccess,
   userFail,
@@ -44,6 +43,7 @@ import {
   userUpdateSuccess,
   userUpdateFail,
 } from '../pages/user/profileSlice';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 const BASE_URL = 'http://localhost:3001/api/v1';
 export const LOGIN_URL = BASE_URL + '/user/login';
@@ -97,7 +97,7 @@ const USER_URL = BASE_URL + '/user/profile';
 export const userProfile = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const token = JSON.parse(sessionStorage.getItem('token'));
+      const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
@@ -108,6 +108,7 @@ export const userProfile = () => {
       if (token) {
         const userInfo = res?.data?.body;
         localStorage.setItem('firstName', userInfo?.firstName);
+        localStorage.setItem('lastName', userInfo?.lastName);
       }
 
       console.log('response userPorfile:', res.data?.body);
@@ -121,17 +122,17 @@ export const userProfile = () => {
 
 export const getUserProfile = () => async (dispatch) => {
   try {
-    dispatch(userPending());
+    dispatch(userSlice.actions.userPending());
 
     const res = await userProfile();
     if (res) {
-      return dispatch(userSuccess(res.data));
+      return dispatch(userSlice.actions.userSuccess(res.data));
     }
 
     console.log('response de user :', res);
-    dispatch(userFail('User is not found'));
+    dispatch(userSlice.actions.userFail('User is not found'));
   } catch (error) {
-    dispatch(userFail(error));
+    dispatch(userSlice.actions.userFail(error));
     console.log(error.message);
   }
 };
@@ -160,6 +161,21 @@ export const login = (email, password, rememberMe) => {
       reject(error);
     }
   });
+};
+
+export const updateUser = (firstName, lastName) => (dispatch) => {
+  const token = JSON.parse(sessionStorage.getItem('token'));
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }
+  axios
+    .put(USER_URL, { firstName: firstName, lastName: lastName })
+    .then((res) => {
+      dispatch(userSlice.actions.userUpdateSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(userSlice.actions.userUpdateFail(err.message));
+    });
 };
 
 // V2

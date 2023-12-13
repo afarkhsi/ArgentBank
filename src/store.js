@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { loginSlice } from './pages/signIn/loginSlice';
-import { userSlice } from './pages/user/profileSlice';
 import userReducer from './pages/user/profileSlice';
+import userSlice from './pages/user/profileSlice';
 
 const store = configureStore({
   reducer: {
     login: loginSlice.reducer,
-    user: userReducer,
+    user: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

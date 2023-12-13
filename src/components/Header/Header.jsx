@@ -1,7 +1,10 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../assets/argentBankLogo.png';
 import './style.css';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import LogInOut from '../LogIn/LogIn';
 
 const HomeLogo = styled.img`
   background-color: none;
@@ -20,17 +23,22 @@ const NavContainer = styled.nav`
 `;
 
 const StyledLink = styled(NavLink)`
-  color: black;
+  color: #2c3e50;
   text-decoration: none;
   text-align: center;
   &:hover {
     color: green;
   }
-  color: #2c3e50;
 `;
 
 // Function generating Header Component in all pages
 function Header() {
+  // const { token } = useSelector((state) => state.login);
+
+  // const logOut = () => {
+  //   localStorage.removeItem('token');
+  //   sessionStorage.removeItem('token');
+  // };
   return (
     <NavContainer className="header">
       <Link className="header_logo" to="/">
@@ -40,10 +48,22 @@ function Header() {
           alt="ArgentBank logo"
         />
       </Link>
-      <StyledLink to="/login" className="header_nav_link">
-        <i className="fa fa-user-circle"></i>
-        Sign In
-      </StyledLink>
+      <LogInOut />
+      {/* {token === null || !token || token === '' ? (
+        <StyledLink to="/login" className="header_nav_link sign_in">
+          <i className="fa fa-user-circle"></i>
+          Sign In
+        </StyledLink>
+      ) : (
+        <StyledLink
+          to={'/'}
+          className="header_nav_link sign_out"
+          onClick={logOut}
+        >
+          <i className="fa fa-sign-out"></i>
+          Sign Out
+        </StyledLink>
+      )} */}
     </NavContainer>
   );
 }

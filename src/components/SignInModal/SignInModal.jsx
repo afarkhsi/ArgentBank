@@ -14,6 +14,7 @@ if (token) {
 }
 
 const SignInModal = () => {
+  document.title = 'Argent Bank - Sign In';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
