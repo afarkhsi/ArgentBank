@@ -57,3 +57,19 @@
   padding: 5px;
   font-size: 1.2rem;
 }
+
+.alert-success {
+  padding: 5px;
+  border-radius: 5px;
+  color: #270;
+  background-color: #dff2bf;
+  text-align: center;
+}
+.error {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+  color: #d8000c;
+  background-color: #ffbaba;
+  text-align: center;
+}

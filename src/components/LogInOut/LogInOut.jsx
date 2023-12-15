@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import userSlice, {
-  userLogout,
-  userSuccess,
-} from '../../pages/user/profileSlice';
-import { loginSlice } from '../../pages/signIn/loginSlice';
+import userSlice from '../../pages/user/profileSlice';
+import { loginSlice } from '../../pages/signInUp/loginSlice';
 
 const StyledLink = styled(NavLink)`
   color: #2c3e50;

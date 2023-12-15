@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import createUserSlice from '../../pages/user/createProfileSlice';
-import axios from 'axios';
-import { SIGNUP_URL, getUserProfile, login } from '../../services/apiSlice';
+import { getUserProfile, logUp, login } from '../../services/apiSlice';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginSlice } from '../../pages/signIn/loginSlice';
+import { loginSlice } from '../../pages/signInUp/loginSlice';
 
 const useSignInModal = () => {
   const dispatch = useDispatch();
@@ -15,22 +13,17 @@ const useSignInModal = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [signUp, setSignUp] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const user = useSelector((state) => state.createUser);
   const { isRemember, error } = useSelector((state) => state.login);
+  const { isCreated } = useSelector((state) => state.createUser);
 
   const handleOnChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value } = e.target;
     switch (name) {
       case 'email':
         setEmail(value);
         break;
       case 'password':
         setPassword(value);
-        break;
-      case 'remember-me':
-        setRememberMe(checked);
         break;
       case 'firstName':
         setFirstName(value);
@@ -57,6 +50,7 @@ const useSignInModal = () => {
       if (isAuthentified.status === 'error') {
         return dispatch(loginSlice.actions.logFail(isAuthentified.message));
       }
+
       console.log('test:', isAuthentified.token);
       dispatch(loginSlice.actions.logSuccess(isAuthentified));
       dispatch(getUserProfile());
@@ -67,27 +61,14 @@ const useSignInModal = () => {
     }
   };
 
-  const logUp = (e) => {
+  const handleOnSignUp = async (e) => {
     e.preventDefault();
-    dispatch(createUserSlice.actions.createUserPending());
-    axios
-      .post(SIGNUP_URL, {
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-      })
-      .then((res) => {
-        dispatch(createUserSlice.actions.createUserSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(createUserSlice.actions.createUserFail(err.message));
-        console.log(err.message);
-      });
+    dispatch(logUp(email, password, firstName, lastName));
+    navigate('/login');
   };
 
   return {
-    logUp,
+    handleOnSignUp,
     handleOnSubmit,
     handleOnChange,
     signUp,
@@ -99,6 +80,7 @@ const useSignInModal = () => {
     setFirstName,
     setLastName,
     password,
+    isCreated,
   };
 };
 

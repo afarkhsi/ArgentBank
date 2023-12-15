@@ -3,11 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 //Initial user state
 const initialState = {
   isLoading: false,
+  isCreated: false,
   email: '',
   password: '',
   firstName: '',
   lastName: '',
-  _id: '',
+  id: '',
   error: null,
 };
 
@@ -20,15 +21,17 @@ const createUserSlice = createSlice({
       state.isLoading = true;
     },
     createUserSuccess: (state, action) => {
+      state.isCreated = true;
       state.email = action.payload.body?.email;
       state.firstName = action.payload.body?.firstName;
       state.lastName = action.payload.body?.lastName;
       state.password = action.payload.body?.password;
-      state.id = action.payload.body?._id;
+      state.id = action.payload.body?.id;
       state.error = null;
       state.isLoading = false;
     },
     createUserFail: (state, action) => {
+      state.isCreated = false;
       state.email = null;
       state.firstName = null;
       state.lastName = null;

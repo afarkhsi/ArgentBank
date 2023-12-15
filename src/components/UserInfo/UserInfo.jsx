@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getUserProfile,
-  updateUser,
-  userProfile,
-} from '../../services/apiSlice';
-import userSlice from '../../pages/user/profileSlice';
+import { getUserProfile, updateUser } from '../../services/apiSlice';
 
 const UserInfo = () => {
   const token = useSelector((state) => state.login.token);

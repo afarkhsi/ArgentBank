@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
 import './style.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getUserProfile, logUp, login } from '../../services/apiSlice';
-import { loginSlice } from '../../pages/signIn/loginSlice';
+import { useDispatch } from 'react-redux';
+import { loginSlice } from '../../pages/signInUp/loginSlice';
 
 import axios from 'axios';
 import useSignInModal from './useSignInModal';
@@ -15,7 +12,7 @@ if (token) {
 
 const SignInModal = () => {
   const {
-    logUp,
+    handleOnSignUp,
     handleOnSubmit,
     handleOnChange,
     signUp,
@@ -26,7 +23,7 @@ const SignInModal = () => {
     setPassword,
     setFirstName,
     setLastName,
-    password,
+    isCreated,
   } = useSignInModal();
   document.title = 'Argent Bank - Sign In';
 
@@ -34,11 +31,11 @@ const SignInModal = () => {
 
   return (
     <main className="main bg-dark">
-      <section className="sign-in-content">
-        <i className="fa fa-user-circle sign-in-icon"></i>
-        <h1>Sign In</h1>
-        {/* {error && <div variant="danger">{error}</div>} */}
-        {!signUp ? (
+      {/* {error && <div variant="danger">{error}</div>} */}
+      {!signUp ? (
+        <section className="sign-in-content">
+          <i className="fa fa-user-circle sign-in-icon"></i>
+          <h1>Sign In</h1>
           <form onSubmit={handleOnSubmit}>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
@@ -57,7 +54,7 @@ const SignInModal = () => {
                 type="password"
                 name="password"
                 id="password"
-                value={password}
+                // value={password}
                 required
                 onChange={handleOnChange}
               />
@@ -88,10 +85,21 @@ const SignInModal = () => {
               </button>
             </div>
 
-            {error !== null ? <label className="error">{error}</label> : ''}
+            {error !== null ? <div className="error">{error}</div> : ''}
           </form>
-        ) : (
-          <form onSubmit={logUp}>
+        </section>
+      ) : (
+        <section className="sign-in-content">
+          <i className="fa fa-user-circle sign-in-icon"></i>
+          <h1>Sign Up</h1>
+          <form onSubmit={handleOnSignUp}>
+            {isCreated ? (
+              <div className="alert alert-success" role="alert">
+                Profile Created Successfully !
+              </div>
+            ) : (
+              ''
+            )}
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
               <input
@@ -159,10 +167,14 @@ const SignInModal = () => {
               </button>
             </div>
 
-            {error !== null ? <label className="error">{error}</label> : ''}
+            {error !== null ? (
+              <label className="error">{error.message}</label>
+            ) : (
+              ''
+            )}
           </form>
-        )}
-      </section>
+        </section>
+      )}
     </main>
   );
 };
