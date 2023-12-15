@@ -54,6 +54,7 @@ const SignInModal = () => {
                 type="password"
                 name="password"
                 id="password"
+                placeholder="Enter Password"
                 // value={password}
                 required
                 onChange={handleOnChange}
@@ -119,7 +120,7 @@ const SignInModal = () => {
                 type="password"
                 name="password"
                 id="password"
-                // value={password}
+                placeholder="Enter Password"
                 required
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -132,7 +133,7 @@ const SignInModal = () => {
                 type="firstName"
                 name="firstName"
                 id="firstName"
-                // value={password}
+                placeholder="Enter Firstname"
                 required
                 onChange={(e) => {
                   setFirstName(e.target.value);
@@ -145,7 +146,7 @@ const SignInModal = () => {
                 type="lastName"
                 name="lastName"
                 id="lastName"
-                // value={password}
+                placeholder="Enter Lastname"
                 required
                 onChange={(e) => {
                   setLastName(e.target.value);
@@ -153,7 +154,7 @@ const SignInModal = () => {
               />
             </div>
 
-            <div>
+            <div className="signup-buttons">
               <button className="create-account-button" type="submit">
                 Create account
               </button>

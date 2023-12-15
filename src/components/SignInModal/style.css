@@ -73,3 +73,28 @@
   background-color: #ffbaba;
   text-align: center;
 }
+
+.signup-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.create-account-button,
+.create-account-option {
+  display: block;
+  width: 100%;
+  padding: 8px 0px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.create-account-button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+}
+
+.create-account-option {
+  border-color: #bc2900;
+  background-color: #bc2900;
+}
