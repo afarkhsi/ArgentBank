@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { loginSlice } from './pages/signIn/loginSlice';
+import { loginSlice } from './pages/signInUp/loginSlice';
 import userSlice from './pages/user/profileSlice';
 import createUserSlice from './pages/signInUp/createProfileSlice';
 
