@@ -15,13 +15,16 @@ const StyledLink = styled(NavLink)`
 
 const LogInOut = () => {
   const dispatch = useDispatch();
-  const { isAuthentified } = useSelector((state) => state.login);
+  const { isAuthentified, isRemember } = useSelector((state) => state.login);
   const { firstName } = useSelector((state) => state.user);
   //   const firstNameStorage = localStorage.getItem('firstName');
 
   const signOut = () => {
-    localStorage.clear();
-    sessionStorage.clear();
+    if (isRemember === false) {
+      localStorage.clear();
+      sessionStorage.clear();
+    }
+
     dispatch(userSlice.actions.userLogout());
     dispatch(loginSlice.actions.logOut());
   };
@@ -41,7 +44,7 @@ const LogInOut = () => {
       )}
       {isAuthentified && (
         <StyledLink
-          to="/"
+          to="/login"
           className="header_nav_link sign_out"
           onClick={() => signOut()}
         >

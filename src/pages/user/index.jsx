@@ -20,12 +20,12 @@ const UserPage = () => {
   // const dispatch = useDispatch();
   // dispatch(auth_service.userProfile(token));
 
-  useEffect(() => {
-    if (token === null) {
-      navigate('/');
-      sessionStorage.clear();
-    }
-  }, [token, navigate]);
+  // useEffect(() => {
+  //   if (token === null) {
+  //     navigate('/');
+  //     sessionStorage.clear();
+  //   }
+  // }, [token, navigate]);
 
   return (
     <>

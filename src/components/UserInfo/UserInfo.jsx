@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserProfile, updateUser } from '../../services/apiSlice';
+import { updateUser } from '../../services/apiSlice';
 import './style.css';
 
 const UserInfo = () => {
-  const token = useSelector((state) => state.login.token);
+  // const token = useSelector((state) => state.login.token);
   const user = useSelector((state) => state.user);
   const { firstName, lastName } = useSelector((state) => state.user);
   // const firstName = localStorage.getItem('firstName');
@@ -21,11 +21,11 @@ const UserInfo = () => {
     dispatch(updateUser(updatedFirstName, updatedLastName));
   };
 
-  useEffect(() => {
-    if (token !== null) {
-      dispatch(getUserProfile(token));
-    }
-  }, [token, dispatch]);
+  // useEffect(() => {
+  //   if (token !== null) {
+  //     dispatch(getUserProfile(token));
+  //   }
+  // }, [token, dispatch]);
 
   return (
     <div className="header">

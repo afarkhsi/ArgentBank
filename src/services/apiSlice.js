@@ -11,7 +11,7 @@ export const SIGNUP_URL = BASE_URL + '/user/signup';
 export const login = (email, password, rememberMe) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.post(LOGIN_URL, { email, password });
+      const res = await axios.post(LOGIN_URL, { email, password, rememberMe });
       // axios.defaults.headers.common['Authorization'] =
       //   'Bearer ' + res.data.body.token;
       const { token } = res.data?.body;
@@ -19,9 +19,12 @@ export const login = (email, password, rememberMe) => {
       console.log('response login:', res);
       resolve(res.data);
 
-      if (rememberMe) {
-        localStorage.setItem('token', JSON.stringify(token));
+      if (rememberMe === true) {
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        console.log('data remember:', email, password);
       }
+
       if (res.data?.status === 200) {
         sessionStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('token', JSON.stringify(token));
@@ -65,11 +68,11 @@ export const userProfile = () => {
         reject('Token not found!');
       }
       const res = await axios.post(USER_URL);
-      if (token) {
-        const userInfo = res?.data?.body;
-        localStorage.setItem('firstName', userInfo?.firstName);
-        localStorage.setItem('lastName', userInfo?.lastName);
-      }
+      // if (token) {
+      //   const userInfo = res?.data?.body;
+      //   localStorage.setItem('firstName', userInfo?.firstName);
+      //   localStorage.setItem('lastName', userInfo?.lastName);
+      // }
 
       console.log('response userPorfile:', res.data?.body);
       resolve(res);

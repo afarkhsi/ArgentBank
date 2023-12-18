@@ -8,13 +8,28 @@ const useSignInModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(localStorage.getItem('email') || '');
+  const [password, setPassword] = useState(
+    localStorage.getItem('password') || ''
+  );
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [signUp, setSignUp] = useState(false);
   const { isRemember, error } = useSelector((state) => state.login);
   const { isCreated } = useSelector((state) => state.createUser);
+
+  // const emailRemember = localStorage.getItem('email') || '';
+
+  // const passwordRemember = localStorage.getItem('password') || '';
+
+  function remember() {
+    if (isRemember === true) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+      setEmail(email);
+      setPassword(password);
+    }
+  }
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -36,17 +51,29 @@ const useSignInModal = () => {
     }
   };
 
+  // if (isRemember === false) {
+  //   localStorage.removeItem('email');
+  //   localStorage.removeItem('password');
+  // }
+  // if (isRemember === true) {
+  //   localStorage.setItem('email', email);
+  //   localStorage.setItem('password', password);
+  // } else {
+  //   localStorage.removeItem('email');
+  //   localStorage.removeItem('password');
+  // }
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      return alert('Fill up all the form');
-    }
-
+    // if (!email || !password) {
+    //   return alert('Fill up all the form');
+    // }
+    remember();
     dispatch(loginSlice.actions.logPending());
     console.log(email, password);
 
     try {
-      const isAuthentified = await login(email, password);
+      const isAuthentified = await login(email, password, isRemember);
       if (isAuthentified.status === 'error') {
         return dispatch(loginSlice.actions.logFail(isAuthentified.message));
       }
@@ -76,10 +103,13 @@ const useSignInModal = () => {
     setSignUp,
     error,
     setEmail,
+    email,
+
     setPassword,
+    password,
+
     setFirstName,
     setLastName,
-    password,
     isCreated,
   };
 };

@@ -19,7 +19,9 @@ const SignInModal = () => {
     isRemember,
     setSignUp,
     error,
+    email,
     setEmail,
+    password,
     setPassword,
     setFirstName,
     setLastName,
@@ -45,7 +47,9 @@ const SignInModal = () => {
                 id="email"
                 placeholder="Enter Email"
                 required
+                defaultValue={email}
                 onChange={handleOnChange}
+                def
               />
             </div>
             <div className="input-wrapper">
@@ -55,7 +59,7 @@ const SignInModal = () => {
                 name="password"
                 id="password"
                 placeholder="Enter Password"
-                // value={password}
+                defaultValue={password}
                 required
                 onChange={handleOnChange}
               />
