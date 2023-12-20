@@ -1,0 +1,303 @@
+openapi: 3.0.1
+info:
+  title: Argent Bank API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0'
+  termsOfService: http://swagger.io/terms/
+
+servers:
+  - url: https://localhost:3001/api/v1
+# tags:
+#   - name: User Module
+#     description: Operations about user
+paths:
+  /accounts:
+    get:
+      tags:
+        - User Accounts Module
+      summary: Get user accounts
+      description: Api for getting all user accounts
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/Accounts'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+
+  /accounts/{accountId}:
+    get:
+      tags:
+        - User Accounts Module
+      summary: Get single user account
+      description: Api for getting a single user account
+      operationId: findAccountByItemId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+        - name: AccountId
+          in: path
+          description: User Account by ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Authorization error
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+
+  /accounts/{accountId}/transactions:
+    get:
+      tags:
+        - User Transactions
+      summary: Get all user transactions
+      description: Returns a list of user transactions
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+        - name: AccountId
+          in: path
+          description: User Account by Id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User transactions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/Transactions'
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Authorization error
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+
+  /accounts/{accountId}/transactions/{transactionsId}:
+    get:
+      tags:
+        - User Transactions
+      summary: Get a single user transaction
+      description: Returns an user transaction
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+        - name: AccountId
+          in: path
+          description: User Account by Id
+          required: true
+          schema:
+            type: integer
+        - name: TransactionId
+          in: path
+          description: User Transaction by Id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User transaction retrieved successully
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Authorization error
+        '404':
+          description: Did not found any transaction
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+
+    patch:
+      tags:
+        - User Transactions
+      summary: Update the transaction
+      description: Update the transaction (category and note)
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+        - name: AccountId
+          in: path
+          description: User Account by Id
+          required: true
+          schema:
+            type: integer
+        - name: TransactionId
+          in: path
+          description: User Transaction by Id
+          required: true
+          schema:
+            type: integer
+        - name: Body
+          in: path
+          description: Edit and Update the transaction
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Transaction updated successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                $ref: '#/components/schemas/Edit'
+        '400':
+          description: Invalid fields
+        '401':
+          description: Authorization error
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - User Transactions
+      summary: Delete a transaction information
+      description: Delete a transaction information (category and/or note)
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+        - name: AccountId
+          in: path
+          description: User Account by Id
+          required: true
+          schema:
+            type: integer
+        - name: TransactionId
+          in: path
+          description: User Transaction by Id
+          required: true
+          schema:
+            type: integer
+        - name: Body
+          in: path
+          description: Delete a transaction information
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Transaction information deleted successfully
+        '400':
+          description: Invalid fields
+        '401':
+          description: Authorization error
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+          example: 7
+        name:
+          type: string
+          example: Argent Bank Checking (x8349)
+        amount:
+          type: integer
+          format: int64
+          example: $2,082.79
+    Accounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Accounts'
+    Edit:
+      type: object
+      properties:
+        category:
+          type: string
+        note:
+          type: string
+    Transaction:
+      type: object
+      properties:
+        date:
+          type: string
+        description:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        balance:
+          type: integer
+          format: int64
+        category:
+          type: string
+        note:
+          type: string
+    Transactions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Transactions'
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: api_key
+      in: header

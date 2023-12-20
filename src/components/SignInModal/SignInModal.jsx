@@ -49,7 +49,6 @@ const SignInModal = () => {
                 required
                 defaultValue={email}
                 onChange={handleOnChange}
-                def
               />
             </div>
             <div className="input-wrapper">

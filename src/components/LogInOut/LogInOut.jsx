@@ -44,7 +44,7 @@ const LogInOut = () => {
       )}
       {isAuthentified && (
         <StyledLink
-          to="/login"
+          to="/"
           className="header_nav_link sign_out"
           onClick={() => signOut()}
         >

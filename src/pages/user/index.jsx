@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import AmountCard from '../../components/AmountCard/AmoutCard';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import UserInfo from '../../components/UserInfo/UserInfo';
+import { useEffect } from 'react';
 
 const UserContainer = styled.div``;
 
@@ -16,16 +16,14 @@ const UserPage = () => {
       ? localStorage.getItem('token')
       : null
   );
-  const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // dispatch(auth_service.userProfile(token));
 
-  // useEffect(() => {
-  //   if (token === null) {
-  //     navigate('/');
-  //     sessionStorage.clear();
-  //   }
-  // }, [token, navigate]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token === null) {
+      navigate('/');
+      sessionStorage.clear();
+    }
+  }, [token, navigate]);
 
   return (
     <>
