@@ -1,49 +1,44 @@
-# Project #10 - Argent Bank API
+# ARGENT BANK (with Create React App)
 
-This codebase contains the code needed to run the backend for Argent Bank.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Getting Started
 
-### Prerequisites
+![Capture d'écran 2023-12-21 012554](https://github.com/afarkhsi/ArgentBank/assets/57017179/847b1c53-9ab4-4a56-8241-d43ef0954f8e)
 
-Argent Bank uses the following tech stack:
+
+Le projet concerne une nouvelle banque qui démarre, Argent Bank, qui essaie de percer dans le secteur et qui a besoin d'aide pour mettre en place son application. 
+
+### Objectif
+
+- Créer l’application web complète et responsive avec React
+- Utiliser Redux pour gérer le state de l'ensemble de l'application.
+- Authentification des utilisateurs - Création d'une application web permettant aux clients de se connecter et de gérer leurs comptes et leur profil.
+- Transactions - Spécifier les endpoints d’API nécessaires pour une éventuelle deuxième mission une fois l'objectif précedent validé.
+
+## Installation
+
+### Prérequis
 
 - [Node.js v12](https://nodejs.org/en/)
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
-Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+### Installation du serveur back-end
+
+- Forker puis cloner le repository à l'adresse suivante :
+  `git clone https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API`
+- La commande `npm` vous permettra d'installer les dépendances liée à ce repository et par la suite de lancer l' API :
 
 ```bash
-# Check Node.js version
-node --version
-
-# Check Mongo version
-mongo --version
+  # Install dependencies
+  npm install
+  
+  # Start local dev server
+  npm run dev:server
+  
+  # Populate database with two users
+  npm run populate-db
 ```
-
-### Instructions
-
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
-
-```bash
-# Install dependencies
-npm install
-
-# Start local dev server
-npm run dev:server
-
-# Populate database with two users
-npm run populate-db
-```
-
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
-
-## Populated Database Data
-
-Once you run the `populate-db` script, you should have two users in your database:
+- Une fois lancée le script `populate-db`, vous devriez desormais voir deux utilisateurs dans la database:
 
 ### Tony Stark
 
@@ -59,86 +54,14 @@ Once you run the `populate-db` script, you should have two users in your databas
 - Email: `steve@rogers.com`,
 - Password: `password456`
 
-## API Documentation
+- La micro API est lancée sur `http://localhost:3001`
+- La documentation de l'API est disponible à cette adresse `http://localhost:3001/api-docs`
 
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+### Installation du front-end
 
-## Design Assets
+- Forker puis cloner le repository à l'adresse suivante :
+  `git clone https://github.com/afarkhsi/ArgentBank.git`
+- La commande `npm` vous permettra d'installer les dépendances liée à ce repository
+- La commande `npm start` vous permettra par la suite de lancer l'application.
+- ARGENT BANK est lancée sur `http://localhost:3000`
 
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
-
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
-
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
