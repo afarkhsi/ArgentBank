@@ -12,17 +12,14 @@ export const login = (email, password, rememberMe) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(LOGIN_URL, { email, password, rememberMe });
-      // axios.defaults.headers.common['Authorization'] =
-      //   'Bearer ' + res.data.body.token;
       const { token } = res.data?.body;
-      // localStorage.setItem('authToken', token);
-      console.log('response login:', res);
+      // console.log('response login:', res);
       resolve(res.data);
 
       if (rememberMe === true) {
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
-        console.log('data remember:', email, password);
+        // console.log('data remember:', email, password);
       }
 
       if (res.data?.status === 200) {
@@ -31,7 +28,6 @@ export const login = (email, password, rememberMe) => {
       }
     } catch (error) {
       console.log(error.message);
-      console.log(LOGIN_URL);
       reject(error);
     }
   });
@@ -68,13 +64,7 @@ export const userProfile = () => {
         reject('Token not found!');
       }
       const res = await axios.post(USER_URL);
-      // if (token) {
-      //   const userInfo = res?.data?.body;
-      //   localStorage.setItem('firstName', userInfo?.firstName);
-      //   localStorage.setItem('lastName', userInfo?.lastName);
-      // }
-
-      console.log('response userPorfile:', res.data?.body);
+      // console.log('response userPorfile:', res.data?.body);
       resolve(res);
     } catch (error) {
       console.log(error.message);
@@ -92,7 +82,7 @@ export const getUserProfile = () => async (dispatch) => {
       return dispatch(userSlice.actions.userSuccess(res.data));
     }
 
-    console.log('response de user :', res);
+    // console.log('response de user :', res);
     dispatch(userSlice.actions.userFail('User is not found'));
   } catch (error) {
     dispatch(userSlice.actions.userFail(error));
@@ -115,10 +105,3 @@ export const updateUser = (firstName, lastName) => (dispatch) => {
       dispatch(userSlice.actions.userUpdateFail(err.message));
     });
 };
-
-/**
- * Step 1 : login
- * Step 2 : cas success => set token dans le local storage
- * Step 3 : set token dans axios config (autorization: bearer)
- * Step 4 : test route user/profile GET / POST
- */

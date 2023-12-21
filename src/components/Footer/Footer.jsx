@@ -1,5 +1,6 @@
 import './style.css';
 
+// FOOTER COMPONENT
 const Footer = () => {
   return (
     <footer className="footer">

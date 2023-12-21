@@ -4,6 +4,7 @@ import MoneyImg from '../../assets/icon-money.png';
 import SecurityImg from '../../assets/icon-security.png';
 import './style.css';
 
+// HOME FEATURES COMPONENT
 const Features = () => {
   return (
     <section className="features">

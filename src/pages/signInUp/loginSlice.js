@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+//Initial login state
 const initialState = {
   token: localStorage.getItem('token'),
   isLoading: false,
@@ -8,6 +9,7 @@ const initialState = {
   error: null,
 };
 
+//login slice
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
@@ -19,6 +21,7 @@ export const loginSlice = createSlice({
       state.token = action.payload?.body?.token;
       state.isAuthentified = true;
       state.isLoading = false;
+      state.error = null;
     },
     logFail: (state, action) => {
       state.error = action.payload;
@@ -36,12 +39,3 @@ export const loginSlice = createSlice({
     },
   },
 });
-
-// export const {
-//   logOnLaoding,
-//   logSucces,
-//   logError,
-//   logRemember,
-//   logOut,
-//   isToken,
-// } = loginSlice;

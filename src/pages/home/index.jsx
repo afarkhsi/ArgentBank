@@ -24,6 +24,7 @@ export const LoaderWrapper = styled.div`
   color: #e60000;
 `;
 
+// HOME PAGE
 const HomePage = () => {
   document.title = 'Argent Bank - Home';
   return (

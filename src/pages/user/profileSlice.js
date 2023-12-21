@@ -10,7 +10,7 @@ const initialState = {
   error: null,
 };
 
-//User slices
+//User slice
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -51,15 +51,5 @@ const userSlice = createSlice({
     },
   },
 });
-
-// const { reducer, actions } = userSlice;
-// export const {
-//   userPending,
-//   userSuccess,
-//   userFail,
-//   userLogout,
-//   userUpdateSuccess,
-//   userUpdateFail,
-// } = actions;
 
 export default userSlice;

@@ -10,6 +10,7 @@ if (token) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
+// SIGN IN / UP MODAL
 const SignInModal = () => {
   const {
     handleOnSignUp,
@@ -33,7 +34,6 @@ const SignInModal = () => {
 
   return (
     <main className="main bg-dark">
-      {/* {error && <div variant="danger">{error}</div>} */}
       {!signUp ? (
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>

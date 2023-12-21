@@ -3,29 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../services/apiSlice';
 import './style.css';
 
+//HEADER USER INFORMATION
 const UserInfo = () => {
-  // const token = useSelector((state) => state.login.token);
   const user = useSelector((state) => state.user);
   const { firstName, lastName } = useSelector((state) => state.user);
-  // const firstName = localStorage.getItem('firstName');
-  // const lastName = localStorage.getItem('lastName');
-
   const [updatedFirstName, setFirstName] = useState('');
   const [updatedLastName, setLastName] = useState('');
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
-  console.log(firstName);
+  // console.log(firstName);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     dispatch(updateUser(updatedFirstName, updatedLastName));
   };
-
-  // useEffect(() => {
-  //   if (token !== null) {
-  //     dispatch(getUserProfile(token));
-  //   }
-  // }, [token, dispatch]);
 
   return (
     <div className="header">

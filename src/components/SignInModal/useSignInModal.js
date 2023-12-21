@@ -18,10 +18,6 @@ const useSignInModal = () => {
   const { isRemember, error } = useSelector((state) => state.login);
   const { isCreated } = useSelector((state) => state.createUser);
 
-  // const emailRemember = localStorage.getItem('email') || '';
-
-  // const passwordRemember = localStorage.getItem('password') || '';
-
   function remember() {
     if (isRemember === true) {
       localStorage.setItem('email', email);
@@ -51,26 +47,10 @@ const useSignInModal = () => {
     }
   };
 
-  // if (isRemember === false) {
-  //   localStorage.removeItem('email');
-  //   localStorage.removeItem('password');
-  // }
-  // if (isRemember === true) {
-  //   localStorage.setItem('email', email);
-  //   localStorage.setItem('password', password);
-  // } else {
-  //   localStorage.removeItem('email');
-  //   localStorage.removeItem('password');
-  // }
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // if (!email || !password) {
-    //   return alert('Fill up all the form');
-    // }
     remember();
     dispatch(loginSlice.actions.logPending());
-    console.log(email, password);
 
     try {
       const isAuthentified = await login(email, password, isRemember);
@@ -78,7 +58,7 @@ const useSignInModal = () => {
         return dispatch(loginSlice.actions.logFail(isAuthentified.message));
       }
 
-      console.log('test:', isAuthentified.token);
+      // console.log('test:', isAuthentified.token);
       dispatch(loginSlice.actions.logSuccess(isAuthentified));
       dispatch(getUserProfile());
       navigate('/profile');
@@ -104,10 +84,8 @@ const useSignInModal = () => {
     error,
     setEmail,
     email,
-
     setPassword,
     password,
-
     setFirstName,
     setLastName,
     isCreated,

@@ -35,3 +35,23 @@ code {
 .bg-dark {
   background-color: #12002b;
 }
+
+@media (max-width: 720px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-description {
+    right: 0px;
+  }
+}
+
+@media (max-width: 450px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-description {
+    max-width: 200px;
+  }
+}

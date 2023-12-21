@@ -6,7 +6,7 @@
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
-  flex-direction: column;
+  flex-direction: row;
   padding: 1.5rem;
   box-sizing: border-box;
   text-align: left;
@@ -33,6 +33,12 @@
 .account-content-wrapper {
   width: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cta {
+  max-width: 210px;
 }
 
 .transaction-button {
@@ -45,4 +51,27 @@
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+}
+
+@media (max-width: 720px) {
+  .account {
+    flex-direction: column;
+  }
+  .cta {
+    max-width: 100%;
+  }
+  .transaction-button {
+    font-size: 0.8rem;
+  }
+
+  .account-amount {
+    font-size: 1.5rem;
+  }
+  .account-title {
+    font-size: 0.8rem;
+  }
+
+  .account-amount-description {
+    font-size: 0.8rem;
+  }
 }

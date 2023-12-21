@@ -33,3 +33,9 @@
   border: 2px solid #00bc77;
   background-color: #ffffff;
 }
+
+@media (max-width: 450px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+}

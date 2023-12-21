@@ -30,3 +30,23 @@
   display: flex;
   gap: 2rem;
 }
+
+.header_logo_img {
+  width: 200px;
+}
+
+@media (max-width: 550px) {
+  .fa-sign-out,
+  .fa-user-circle {
+    font-size: 20px;
+  }
+  .header_nav_link {
+    font-size: 15px;
+  }
+  .header_nav {
+    gap: 1rem;
+  }
+  .header_logo_img {
+    width: 150px;
+  }
+}

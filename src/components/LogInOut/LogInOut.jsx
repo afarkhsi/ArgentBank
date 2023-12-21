@@ -13,12 +13,11 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
+// LOGIN LOGOUT COMPONENT
 const LogInOut = () => {
   const dispatch = useDispatch();
   const { isAuthentified, isRemember } = useSelector((state) => state.login);
   const { firstName } = useSelector((state) => state.user);
-  //   const firstNameStorage = localStorage.getItem('firstName');
-
   const signOut = () => {
     if (isRemember === false) {
       localStorage.clear();

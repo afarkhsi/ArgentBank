@@ -3,6 +3,7 @@ import { loginSlice } from './pages/signInUp/loginSlice';
 import userSlice from './pages/user/profileSlice';
 import createUserSlice from './pages/signInUp/createProfileSlice';
 
+// STORE
 const store = configureStore({
   reducer: {
     login: loginSlice.reducer,

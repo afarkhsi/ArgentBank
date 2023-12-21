@@ -17,6 +17,7 @@ const BannerDescription = styled.div`
   background-color: white;
 `;
 
+// BANNER COMPONENT
 const Banner = () => {
   return (
     <BannerContainer>
