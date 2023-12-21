@@ -6,7 +6,8 @@
   position: absolute;
   top: 50px;
   right: 50px;
-  width: 300px;
+  max-width: 300px;
+  width: 100%;
   margin: 2rem;
   padding: 2rem;
   color: #2c3e50;
@@ -21,4 +22,11 @@
 .banner-description_text {
   margin-bottom: 0;
   font-size: 0.9rem;
+}
+
+@media (max-width: 550px) {
+  .banner-description {
+    right: 0px;
+    max-width: 200px;
+  }
 }
