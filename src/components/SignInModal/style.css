@@ -1,0 +1,100 @@
+.sign-in-button,
+.sign-up-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+.sign-in-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #2c3e50;
+}
+
+.SignIn-Container {
+  background-color: #12002b;
+}
+
+.sign-in-icon {
+  font-size: 1.2rem;
+  padding-right: 0px;
+}
+
+.input-remember {
+  display: flex;
+}
+
+.input-remember label {
+  margin-left: 0.25rem;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper label {
+  font-weight: bold;
+}
+
+.input-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+.alert-success {
+  padding: 5px;
+  border-radius: 5px;
+  color: #270;
+  background-color: #dff2bf;
+  text-align: center;
+}
+.error {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+  color: #d8000c;
+  background-color: #ffbaba;
+  text-align: center;
+}
+
+.signup-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.create-account-button,
+.create-account-option {
+  display: block;
+  width: 100%;
+  padding: 8px 0px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.create-account-button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+}
+
+.create-account-option {
+  border-color: #bc2900;
+  background-color: #bc2900;
+}
