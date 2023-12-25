@@ -1,12 +1,16 @@
 // import './style.css';
 import styled from 'styled-components';
 import Banner from '../../components/Banner/Banner';
+import Features from '../../components/Features/Features';
+// import { callApi } from '../../callApi';
 
 const HomeContainer = styled.div`
   position: relative;
-  display: flex;
+  // display: flex;
   width: 100%;
-  height: 92%;
+  // height: 92%;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const LoaderWrapper = styled.div`
@@ -20,12 +24,15 @@ export const LoaderWrapper = styled.div`
   color: #e60000;
 `;
 
-
-
-const HomePage = () => (
-  <HomeContainer>
-    <Banner />
-  </HomeContainer>
-);
+// HOME PAGE
+const HomePage = () => {
+  document.title = 'Argent Bank - Home';
+  return (
+    <HomeContainer>
+      <Banner />
+      <Features />
+    </HomeContainer>
+  );
+};
 
 export default HomePage;
